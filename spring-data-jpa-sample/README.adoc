@@ -1,0 +1,66 @@
+= Spring Data JPA example in Kotlin
+
+The purpose of this example is to serve as a quick reference guide to anyone implementing a Spring Boot microservice
+ using Kotlin and https://projects.spring.io/spring-data-jpa/[Spring Data JPA] to create a JPA based repository.
+
+It consists of a working project that can run as an independent JAR and also as a deployable WAR.
+
+The main purpose of this example is to compare it with other Spring Data alternative for Relational Databases,
+ which is https://docs.spring.io/spring/docs/current/spring-framework-reference/html/jdbc.html[Spring Data JDBC].
+ We provide an https://github.com/alexpensato/spring-data-jdbctemplate-example[example here]
+ based on Spring Data JDBC, JdbcTemplate and Kotlin.
+
+== Requirements
+* JDK 1.8+
+* PostgreSQL 9.5+
+* Gradle 2.13 (for compatibility with current testing framework)
+* An IDE that supports Kotlin language (preferably IntelliJ IDEA)
+
+== Database preparation
+
+Before running the project, it is necessary to create its user and database in the PostgreSQL server.
+
+The project has a few settings configured in application.properties file, but you can modify them as you wish.
+
+Below are DDL commands using PostgreSQL syntax:
+
+[source, sql]
+----
+CREATE USER pensato WITH
+	LOGIN
+	SUPERUSER
+	INHERIT
+	NOREPLICATION
+	CONNECTION LIMIT -1
+	PASSWORD 'pensato';
+----
+
+[source, sql]
+----
+CREATE DATABASE jdbctemplate
+    WITH
+    OWNER = pensato
+    ENCODING = 'UTF8'
+    CONNECTION LIMIT = -1;
+----
+
+== Disclaimer
+
+This project is neither an API modeling example, nor it is as a DDD (Domain Driven Design) example.
+
+Use it only as a Kotlin language reference guide to implement a Spring Data JPA microservice project.
+
+
+== Contributions
+
+…are always welcome.
+
+Don’t hesitate to submit a https://github.com/alexpensato/spring-data-jpa-example/issues[bug report] or a
+https://github.com/alexpensato/spring-data-jpa-example/pulls[pull requests].
+
+When filling a bug report or submitting a new feature, please try including supporting test cases.
+
+
+== License
+
+This project is licensed under http://www.apache.org/licenses/LICENSE-2.0.html[Apache License 2.0].
