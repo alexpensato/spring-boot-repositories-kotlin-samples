@@ -27,8 +27,8 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/university")
 class UniversityController
-@Autowired constructor(val collegeRepository: CollegeRepository, val studentRepository: StudentRepository)
-    : AbstractController<College, Long, CollegeRepository>(collegeRepository){
+@Autowired constructor(collegeRepository: CollegeRepository, val studentRepository: StudentRepository)
+    : AbstractController<College, Long>(collegeRepository){
 
     @RequestMapping(value = "/{collegeId}/students", method = arrayOf(RequestMethod.GET))
     @ResponseBody

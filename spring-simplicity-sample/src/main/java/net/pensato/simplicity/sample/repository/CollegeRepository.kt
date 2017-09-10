@@ -13,10 +13,9 @@ import java.util.LinkedHashMap
 interface CollegeRepository: JdbcRepository<College, Long> {}
 
 @Repository(value = "collegeRepository")
-open class CollegeRepositoryImpl : AbstractJdbcRepository<College, Long>, CollegeRepository
+open class CollegeRepositoryImpl(@Autowired jdbcTemplate: JdbcTemplate) : CollegeRepository,
+        AbstractJdbcRepository<College, Long>(jdbcTemplate, "college", College::class, "id")
 {
-    @Autowired constructor(jdbcTemplate: JdbcTemplate): super(jdbcTemplate, "college", College::class, "id") {}
-
     override val rowMapper: TransactionalRowMapper<College>
         get() = Companion
 

@@ -17,10 +17,9 @@ interface StudentRepository: JdbcRepository<Student, Long> {
 }
 
 @Repository(value = "studentRepository")
-open class StudentRepositoryImpl : AbstractJdbcRepository<Student, Long>, StudentRepository
+open class StudentRepositoryImpl(@Autowired jdbcTemplate: JdbcTemplate) : StudentRepository,
+    AbstractJdbcRepository<Student, Long>(jdbcTemplate, "student", Student::class, "id")
 {
-    @Autowired constructor(jdbcTemplate: JdbcTemplate): super(jdbcTemplate, "student", Student::class, "id") {}
-
     override val rowMapper: TransactionalRowMapper<Student>
         get() = Companion
 
