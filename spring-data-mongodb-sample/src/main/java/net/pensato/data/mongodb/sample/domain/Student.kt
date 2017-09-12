@@ -13,15 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.pensato.data.jpa.sample.repository
+package net.pensato.data.mongodb.sample.domain
 
-import net.pensato.data.jpa.sample.domain.College
-import net.pensato.data.jpa.sample.domain.Student
-import org.springframework.data.repository.PagingAndSortingRepository
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.index.Indexed
+import org.springframework.data.mongodb.core.mapping.DBRef
+import org.springframework.data.mongodb.core.mapping.Document
 
-interface StudentRepository : PagingAndSortingRepository<Student, Long> {
-
-    fun findAllByCollege(college: College): List<Student>
-
-}
-
+@Document(collection = "student")
+data class Student(
+        @Id
+        var id: Long = 0,
+        @Indexed(unique = true)
+        var name: String = "",
+        var address: String = "",
+        @DBRef
+        var college: College = College()
+)

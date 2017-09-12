@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.pensato.data.jpa.sample.controller
+package net.pensato.data.mongodb.sample.controller
 
-import net.pensato.data.jpa.sample.domain.College
-import net.pensato.data.jpa.sample.domain.Student
-import net.pensato.data.jpa.sample.repository.CollegeRepository
-import net.pensato.data.jpa.sample.repository.StudentRepository
+import net.pensato.data.mongodb.sample.domain.College
+import net.pensato.data.mongodb.sample.domain.Student
+import net.pensato.data.mongodb.sample.repository.CollegeRepository
+import net.pensato.data.mongodb.sample.repository.StudentRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable

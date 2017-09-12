@@ -4,6 +4,7 @@ import net.pensato.simplicity.sample.domain.College
 import net.pensato.simplicity.jdbc.AbstractJdbcRepository
 import net.pensato.simplicity.jdbc.JdbcRepository
 import net.pensato.simplicity.jdbc.mapper.TransactionalRowMapper
+import net.pensato.simplicity.sample.mapper.CollegeMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.stereotype.Repository
@@ -14,30 +15,9 @@ interface CollegeRepository: JdbcRepository<College, Long> {}
 
 @Repository(value = "collegeRepository")
 open class CollegeRepositoryImpl(@Autowired jdbcTemplate: JdbcTemplate) : CollegeRepository,
-        AbstractJdbcRepository<College, Long>(jdbcTemplate, "college", College::class, "id")
+        AbstractJdbcRepository<College, Long>(jdbcTemplate, "college", College::class.java, "id")
 {
     override val rowMapper: TransactionalRowMapper<College>
-        get() = Companion
+        get() = CollegeMapper
 
-
-    companion object Companion: TransactionalRowMapper<College> {
-
-        override fun mapRow(rs: ResultSet, rowNum: Int): College
-        {
-            val entity = College()
-            entity.id = rs.getLong("id")
-            entity.name = rs.getString("name")
-            entity.city = rs.getString("city")
-
-            return entity
-        }
-
-        override fun mapColumns(entity: College): Map<String, Any> {
-            val mapping = LinkedHashMap<String, Any>()
-            mapping.put("id", entity.id)
-            mapping.put("name", entity.name)
-            mapping.put("city", entity.city)
-            return mapping
-        }
-    }
 }

@@ -1,4 +1,4 @@
-group 'net.pensato.data.jpa.sample'
+group 'net.pensato.data.mongodb.sample'
 version '1.1.0'
 
 buildscript {
@@ -26,7 +26,7 @@ apply plugin: 'nebula.provided-base'
 apply plugin: 'org.junit.platform.gradle.plugin'
 
 springBoot {
-    mainClass = 'net.pensato.data.jpa.sample.AppKt'
+    mainClass = 'net.pensato.data.mongodb.sample.AppKt'
 }
 
 junitPlatform {
@@ -52,7 +52,7 @@ dependencies {
     // Spring Boot
     compile("org.springframework.boot:spring-boot-starter-web")
     provided("org.springframework.boot:spring-boot-starter-tomcat")
-    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+	compile("org.springframework.boot:spring-boot-starter-data-mongodb")
 
     // Database
     compile group: 'postgresql', name: 'postgresql-jdbc42', version: '9.4.1208-atlassian-hosted'

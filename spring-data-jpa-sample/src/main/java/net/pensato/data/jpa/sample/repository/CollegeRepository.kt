@@ -16,6 +16,6 @@
 package net.pensato.data.jpa.sample.repository
 
 import net.pensato.data.jpa.sample.domain.College
-import org.springframework.data.repository.CrudRepository
+import org.springframework.data.repository.PagingAndSortingRepository
 
-interface CollegeRepository : CrudRepository<College, Long> {}
+interface CollegeRepository : PagingAndSortingRepository<College, Long> {}

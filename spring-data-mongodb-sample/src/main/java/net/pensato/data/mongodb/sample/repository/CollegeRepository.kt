@@ -13,15 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.pensato.data.jpa.sample.repository
+package net.pensato.data.mongodb.sample.repository
 
-import net.pensato.data.jpa.sample.domain.College
-import net.pensato.data.jpa.sample.domain.Student
-import org.springframework.data.repository.PagingAndSortingRepository
+import net.pensato.data.mongodb.sample.domain.College
+import org.springframework.data.mongodb.repository.MongoRepository
 
-interface StudentRepository : PagingAndSortingRepository<Student, Long> {
-
-    fun findAllByCollege(college: College): List<Student>
-
-}
-
+interface CollegeRepository : MongoRepository<College, Long> {}
