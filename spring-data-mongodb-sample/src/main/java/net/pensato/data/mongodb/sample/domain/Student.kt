@@ -22,7 +22,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 
 @Document(collection = "student")
 data class Student(
-        @Id var id: Long = 0,
+        @Id var id: String? = null,
         @Indexed(unique = true)  var name: String = "",
         var address: String = "",
         @DBRef var college: College = College()
