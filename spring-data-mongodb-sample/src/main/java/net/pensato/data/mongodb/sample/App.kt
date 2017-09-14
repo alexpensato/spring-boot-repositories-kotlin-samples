@@ -25,10 +25,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.builder.SpringApplicationBuilder
 import org.springframework.boot.web.support.SpringBootServletInitializer
 import org.springframework.context.annotation.Bean
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 
 @SpringBootApplication
-@EnableJpaRepositories(basePackages = arrayOf("net.pensato.data.jpa.sample.repository"))
 open class App : SpringBootServletInitializer() {
 
 	override fun configure(application: SpringApplicationBuilder): SpringApplicationBuilder {
@@ -43,15 +41,15 @@ open class App : SpringBootServletInitializer() {
         val result = collegeRepository.findAll()
         if (result == null || result.toList().isEmpty()) {
 
-            val uc = collegeRepository.save(College(name = "University of California", city = "Berkeley"))
-			studentRepository.save(Student(name = "Mark", address = "Telegraph Ave", college = uc))
-            studentRepository.save(Student(name = "Susie", address = "Shattuck Ave", college = uc))
-            studentRepository.save(Student(name = "Valerie", address = "Euclid Ave", college = uc))
+            val uc = collegeRepository.save(College(id = 1, name = "University of California", city = "Berkeley"))
+			studentRepository.save(Student(id = 1, name = "Mark", address = "Telegraph Ave", college = uc))
+            studentRepository.save(Student(id = 2, name = "Susie", address = "Shattuck Ave", college = uc))
+            studentRepository.save(Student(id = 3, name = "Valerie", address = "Euclid Ave", college = uc))
 
-            val harvard = collegeRepository.save(College(name = "Harvard University", city = "Cambridge"))
-            studentRepository.save(Student(name = "John", address = "Oxford St", college = harvard))
-            studentRepository.save(Student(name = "Mary", address = "Washington St", college = harvard))
-            studentRepository.save(Student(name = "Joseph", address = "Everett St", college = harvard))
+            val harvard = collegeRepository.save(College(id = 2, name = "Harvard University", city = "Cambridge"))
+            studentRepository.save(Student(id = 4, name = "John", address = "Oxford St", college = harvard))
+            studentRepository.save(Student(id = 5, name = "Mary", address = "Washington St", college = harvard))
+            studentRepository.save(Student(id = 6, name = "Joseph", address = "Everett St", college = harvard))
         }
     }
 }
