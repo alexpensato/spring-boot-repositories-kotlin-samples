@@ -35,44 +35,62 @@ class UniversityController @Autowired constructor(val collegeRepository: College
         return collegeRepository.findAll(pageable)
     }
 
-    @RequestMapping(value = "/{id}", method = arrayOf(RequestMethod.GET))
+    @RequestMapping(value = "/{alias}", method = arrayOf(RequestMethod.GET))
     @ResponseBody
-    fun findById(@PathVariable id: Long?): College {
-        Assert.notNull(id, "You must provide an ID to locate an item in the repository.")
-        return collegeRepository.findOne(id!!)
+    fun findByAlias(@PathVariable alias: String?): College {
+        Assert.notNull(alias, "You must provide an Alias to locate an item in the repository.")
+        val list = collegeRepository.findByAlias(alias)
+        Assert.notEmpty(list, "Alias provided does not correspond to a valid College.")
+        return list[0]
     }
 
-    @RequestMapping(value = "/{collegeId}/students", method = arrayOf(RequestMethod.GET))
+    @RequestMapping(value = "/{collegeAlias}/students", method = arrayOf(RequestMethod.GET))
     @ResponseBody
-    fun findAllStudentsByCollege(@PathVariable collegeId: Long?): List<Student> {
-        Assert.notNull(collegeId, "You must provide an ID to locate nested itens in an auxiliary repository.")
-        val college = collegeRepository.findOne(collegeId!!)
-        Assert.notNull(college, "ID provided does not correspond to a valid College Id.")
-        return studentRepository.findAllByCollege(college)
+    fun findAllStudentsByCollege(@PathVariable collegeAlias: String?): List<Student> {
+        Assert.notNull(collegeAlias, "You must provide an Alias to locate nested itens in an auxiliary repository.")
+        val list = collegeRepository.findByAlias(collegeAlias)
+        Assert.notEmpty(list, "Alias provided does not correspond to a valid College.")
+        return studentRepository.findAllByCollege(list[0])
     }
 
-    @RequestMapping(value = "/{id}", method = arrayOf(RequestMethod.DELETE))
+    @RequestMapping(value = "/{alias}", method = arrayOf(RequestMethod.DELETE))
     @ResponseBody
-    fun delete(@PathVariable id: Long?): String {
-        Assert.notNull(id, "You must provide an ID to delete an item from the repository.")
-        collegeRepository.delete(id!!)
-        return "Item corresponding to ID $id has been deleted."
+    fun delete(@PathVariable alias: String?): String {
+        Assert.notNull(alias, "You must provide an Alias to delete an item from the repository.")
+        val list = collegeRepository.findByAlias(alias)
+        if (list.isNotEmpty()) {
+            collegeRepository.delete(list[0])
+            return "Item corresponding to the Alias $alias has been deleted."
+        } else {
+            return "No item found to be deleted."
+        }
     }
 
-    @RequestMapping(value = "/{id}", method = arrayOf(RequestMethod.PUT))
+    @RequestMapping(value = "/{alias}", method = arrayOf(RequestMethod.PUT))
     @ResponseBody
-    fun update(@PathVariable id: Long?, @RequestBody t: College): String {
-        Assert.notNull(id, "You must provide an ID to update an item in the repository.")
-        Assert.state(t.id == id, "The item you are trying to update does not exist in the repository.")
-        t.id = id!!
+    fun update(@PathVariable alias: String?, @RequestBody t: College): String {
+        Assert.notNull(alias, "You must provide an Alias to update an item in the repository.")
+        Assert.state(t.alias == alias, "The item you are trying to update does not exist in the repository.")
+        t.alias = alias!!
         return "Item updated: ${collegeRepository.save(t)}."
     }
 
     @RequestMapping(method = arrayOf(RequestMethod.POST))
     @ResponseStatus(HttpStatus.CREATED)
     fun create(@RequestBody t: College): College {
+        if (t.alias == "") {
+            t.alias = Companion.nextAlias()
+        }
         val c = collegeRepository.save(t)
         return c
+    }
+
+    companion object {
+        var autoAlias = 0
+        fun nextAlias(): String {
+            val i = autoAlias++
+            return i.toString()
+        }
     }
 
 }

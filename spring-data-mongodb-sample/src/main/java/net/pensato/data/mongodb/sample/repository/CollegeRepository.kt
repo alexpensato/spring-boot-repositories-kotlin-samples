@@ -18,4 +18,8 @@ package net.pensato.data.mongodb.sample.repository
 import net.pensato.data.mongodb.sample.domain.College
 import org.springframework.data.mongodb.repository.MongoRepository
 
-interface CollegeRepository : MongoRepository<College, Long> {}
+interface CollegeRepository : MongoRepository<College, Long> {
+
+    fun findByAlias(alias: String?): List<College>
+
+}
