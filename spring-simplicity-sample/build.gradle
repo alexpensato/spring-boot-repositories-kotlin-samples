@@ -1,5 +1,5 @@
 group 'net.pensato.simplicity.sample'
-version '1.2.1'
+version '1.2.3'
 
 buildscript {
     ext {

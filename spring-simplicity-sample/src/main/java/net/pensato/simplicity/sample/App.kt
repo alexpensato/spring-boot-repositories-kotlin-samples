@@ -15,10 +15,14 @@
  */
 package net.pensato.simplicity.sample
 
+import net.pensato.simplicity.sample.repository.CollegeRepository
+import net.pensato.simplicity.sample.repository.StudentRepository
+import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.builder.SpringApplicationBuilder
 import org.springframework.boot.web.support.SpringBootServletInitializer
+import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.transaction.annotation.EnableTransactionManagement
 
@@ -31,6 +35,15 @@ open class App : SpringBootServletInitializer() {
 	override fun configure(application: SpringApplicationBuilder): SpringApplicationBuilder {
 		return application.sources(App::class.java)
 	}
+
+    @Bean
+    open fun init(
+            collegeRepository: CollegeRepository,
+            studentRepository: StudentRepository) = CommandLineRunner {
+
+        collegeRepository.count()
+		studentRepository.count()
+    }
 
 }
 
