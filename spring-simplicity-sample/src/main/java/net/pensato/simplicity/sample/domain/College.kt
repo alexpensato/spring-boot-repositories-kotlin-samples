@@ -16,10 +16,9 @@
 package net.pensato.simplicity.sample.domain
 
 import org.springframework.data.annotation.Id
-import org.springframework.data.domain.Persistable
 
 data class College (
         @Id var id: Long = 0,
         var name: String = "",
-        var city: String = ""
+        var nameOfCity: String = ""
 )

@@ -1,10 +1,10 @@
 group 'net.pensato.simplicity.sample'
-version '1.2.3'
+version '1.2.4'
 
 buildscript {
     ext {
         springBootVersion = '1.5.6.RELEASE'
-        kotlinVersion = '1.1.4-2'
+        kotlinVersion = '1.1.51'
     }
     repositories {
         mavenCentral()
@@ -60,6 +60,9 @@ dependencies {
     provided("org.springframework.boot:spring-boot-starter-tomcat")
     compile("org.springframework:spring-jdbc")
 	compile("org.springframework.data:spring-data-commons")
+
+    // Google Guava
+    compile("com.google.guava:guava:23.2-jre")
 
     // Database
     compile group: 'postgresql', name: 'postgresql-jdbc42', version: '9.4.1208-atlassian-hosted'

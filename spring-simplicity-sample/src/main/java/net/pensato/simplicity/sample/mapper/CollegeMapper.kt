@@ -11,7 +11,7 @@ object CollegeMapper: TransactionalRowMapper<College> {
         val entity = College()
         entity.id = rs.getLong("id")
         entity.name = rs.getString("name")
-        entity.city = rs.getString("city")
+        entity.nameOfCity = rs.getString("name_of_city")
 
         return entity
     }
@@ -20,7 +20,7 @@ object CollegeMapper: TransactionalRowMapper<College> {
         val mapping = LinkedHashMap<String, Any>()
         mapping.put("id", entity.id)
         mapping.put("name", entity.name)
-        mapping.put("city", entity.city)
+        mapping.put("name_of_city", entity.nameOfCity)
         return mapping
     }
 }

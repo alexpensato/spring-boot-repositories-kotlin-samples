@@ -3,7 +3,7 @@ CREATE SEQUENCE IF NOT EXISTS college_id_seq START 3;
 CREATE TABLE IF NOT EXISTS college (
   id integer DEFAULT nextval('college_id_seq') PRIMARY KEY,
   name varchar(50) NOT NULL,
-  city varchar(100)
+  name_of_city varchar(100)
 );
 
 CREATE SEQUENCE IF NOT EXISTS student_id_seq START 7;
