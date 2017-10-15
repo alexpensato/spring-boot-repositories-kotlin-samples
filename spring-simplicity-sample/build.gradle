@@ -50,16 +50,18 @@ repositories {
 }
 
 dependencies {
-    compile name: 'spring-simplicity'
-
     // Kotlin language
     compile("org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}")
 
     // Spring Boot
     compile("org.springframework.boot:spring-boot-starter-web")
     provided("org.springframework.boot:spring-boot-starter-tomcat")
+
+    // Spring Simplicity
+    compile name: 'spring-simplicity'
+
     compile("org.springframework:spring-jdbc")
-	compile("org.springframework.data:spring-data-commons")
+    compile("org.springframework.data:spring-data-commons")
 
     // Google Guava
     compile("com.google.guava:guava:23.2-jre")
