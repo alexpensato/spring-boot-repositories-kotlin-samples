@@ -1,9 +1,9 @@
 group 'net.pensato.simplicity.sample'
-version '1.2.4'
+version '1.3.0'
 
 buildscript {
     ext {
-        springBootVersion = '1.5.6.RELEASE'
+        springBootVersion = '1.5.8.RELEASE'
         kotlinVersion = '1.1.51'
     }
     repositories {

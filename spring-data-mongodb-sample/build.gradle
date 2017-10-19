@@ -1,10 +1,10 @@
 group 'net.pensato.data.mongodb.sample'
-version '1.1.0'
+version '1.2.0'
 
 buildscript {
     ext {
-        springBootVersion = '1.5.6.RELEASE'
-        kotlinVersion = '1.1.4-2'
+        springBootVersion = '1.5.8.RELEASE'
+        kotlinVersion = '1.1.51'
     }
     repositories {
         mavenCentral()
@@ -55,7 +55,7 @@ dependencies {
 	compile("org.springframework.boot:spring-boot-starter-data-mongodb")
 
     // Database
-    compile group: 'postgresql', name: 'postgresql-jdbc42', version: '9.4.1208-atlassian-hosted'
+//    compile group: 'postgresql', name: 'postgresql-jdbc42', version: '9.4.1208-atlassian-hosted'
 
     // Test
     testCompile group: 'junit', name: 'junit', version: '4.11'

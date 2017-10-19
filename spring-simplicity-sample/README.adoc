@@ -16,7 +16,7 @@ This is an alternative to small projects where JPA is an overkill. It provides a
 == Requirements
 * JDK 1.8+
 * PostgreSQL 9.5+
-* Gradle 2.13 (for compatibility with current testing framework)
+* Gradle 4.2.x
 * An IDE that supports Kotlin language (preferably IntelliJ IDEA)
 
 == Database preparation
@@ -58,8 +58,8 @@ Use it only as a Kotlin language reference guide to implement a Spring Data Jdbc
 
 …are always welcome.
 
-Don’t hesitate to submit a https://github.com/alexpensato/spring-data-jdbctemplate-example/issues[bug report] or a
-https://github.com/alexpensato/spring-data-jdbctemplate-example/pulls[pull requests].
+Don’t hesitate to submit a https://github.com/alexpensato/spring-boot-repositories-samples/issues[bug report] or a
+https://github.com/alexpensato/spring-boot-repositories-samples/pulls[pull requests].
 
 When filling a bug report or submitting a new feature, please try including supporting test cases.
 

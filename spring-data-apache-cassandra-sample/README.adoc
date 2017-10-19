@@ -1,45 +1,53 @@
-= Spring Data MongoDB example in Kotlin
+= Spring Data for Apache Cassandra example in Kotlin
 
 The purpose of this example is to serve as a quick reference guide to anyone implementing a Spring Boot microservice
- using Kotlin and https://projects.spring.io/spring-data-mongodb/[Spring Data MongoDB] to create a Document repository.
+ using Kotlin and https://projects.spring.io/spring-data-cassandra/[Spring Data for Apache Cassandra] to create a CRUD repository.
 
 It consists of a working project that can run as an independent JAR and also as a deployable WAR.
 
 The main purpose of this example is to compare it with other Spring Data alternatives for NoSQL Databases,
- such as https://projects.spring.io/spring-data-cassandra/[Spring Data for Apache Cassandra].
- We provide an https://github.com/alexpensato/spring-boot-repositories-samples/tree/master/spring-data-apache-cassandra-sample[example here]
+ such as https://projects.spring.io/spring-data-mongodb/[Spring Data MongoDB].
+ We provide an https://github.com/alexpensato/spring-boot-repositories-samples/tree/master/spring-data-mongodb-sample[example here]
  based on Spring Data MongoDB and Kotlin.
 
 == Requirements
 * JDK 1.8+
-* MongoDB 3.x
+* Apache Cassandra 3.x
 * Gradle 4.2.x
 * An IDE that supports Kotlin language (preferably IntelliJ IDEA)
 
 == Database preparation
 
-Before running the project, it is necessary to create its database and user in the MongoDB server.
+Before running the project, it is necessary to create its keyspace and tables in Cassandra.
 
 The project has a few settings configured in application.properties file, but you can modify them as you wish.
 
-Below are the shell commands:
+Below are CQL commands for this project:
 
-[source, sql]
+[source, cql]
 ----
-use pensato-sample
+CREATE KEYSPACE "pensato_sample"
+WITH REPLICATION  = {'class': 'SimpleStrategy',
+'replication_factor': 1 };
 
-db.createUser({
-    "user" : "pensato",
-    "pwd" : "pensato",
-    "roles" : [ "readWrite", "dbAdmin" ] })
+USE pensato_sample;
 
+CREATE TABLE college (
+    name text PRIMARY KEY,
+    city text,
+    disciplines set<text>);
+
+CREATE TABLE student (
+    name text PRIMARY KEY,
+    college text,
+    enrollment timestamp);
 ----
 
 == Disclaimer
 
 This project is neither an API modeling example, nor it is as a DDD (Domain Driven Design) example.
 
-Use it only as a Kotlin language reference guide to implement a Spring Data MongoDB microservice project.
+Use it only as a Kotlin language reference guide to implement a Spring Data for Apache Cassandra microservice project.
 
 
 == Contributions
