@@ -40,7 +40,7 @@ CREATE USER pensato WITH
 
 [source, sql]
 ----
-CREATE DATABASE simplicity-sample
+CREATE DATABASE simplicity_sample
     WITH
     OWNER = pensato
     ENCODING = 'UTF8'
