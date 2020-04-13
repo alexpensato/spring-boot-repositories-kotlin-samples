@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 twitter.com/PensatoAlex
+ * Copyright 2017-2020 twitter.com/PensatoAlex
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,28 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.pensato.simplicity.sample.config
+package org.pensatocode.simplicity.sample.config
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Primary
+import org.springframework.core.env.Environment
+import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.datasource.DataSourceTransactionManager
 import org.springframework.transaction.PlatformTransactionManager
 import org.springframework.transaction.annotation.EnableTransactionManagement
+import org.springframework.util.Assert
 import java.util.*
 import javax.sql.DataSource
-import org.springframework.jdbc.core.JdbcTemplate
-import org.springframework.context.annotation.*
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.core.env.Environment
-import org.springframework.util.Assert
 
 
 @Configuration
 @EnableTransactionManagement
 open class DbConfig {
-
-    @Autowired
-    val env: Environment? = null
 
     @Bean
     open fun jdbcTemplate(dataSource: DataSource): JdbcTemplate {
@@ -46,18 +45,10 @@ open class DbConfig {
         return DataSourceTransactionManager(dataSource)
     }
 
-    @Bean(destroyMethod = "shutdown")
+    @Bean
     @Primary
     open fun dataSource(): DataSource {
-        Assert.notNull(env, "Environment properties must not be null to connect to database.")
-        val props = Properties()
-        props.setProperty("dataSourceClassName", env!!.getProperty("spring.datasource.driver-class-name"))
-        props.setProperty("dataSource.serverName", env.getProperty("spring.datasource.server-name"))
-        props.setProperty("dataSource.portNumber", env.getProperty("spring.datasource.port-number"))
-        props.setProperty("dataSource.databaseName", env.getProperty("spring.datasource.database-name"))
-        props.setProperty("dataSource.user", env.getProperty("spring.datasource.user"))
-        props.setProperty("dataSource.password", env.getProperty("spring.datasource.password"))
-
-        return HikariDataSource(HikariConfig(props))
+        val config = HikariConfig("/hikari.properties")
+        return HikariDataSource(config)
     }
 }

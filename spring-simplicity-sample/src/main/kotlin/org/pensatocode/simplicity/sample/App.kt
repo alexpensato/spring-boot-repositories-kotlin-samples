@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 twitter.com/PensatoAlex
+ * Copyright 2017-2020 twitter.com/PensatoAlex
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,15 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.pensato.simplicity.sample
+package org.pensatocode.simplicity.sample
 
-import net.pensato.simplicity.sample.repository.CollegeRepository
-import net.pensato.simplicity.sample.repository.StudentRepository
+import org.pensatocode.simplicity.sample.repository.CollegeRepository
+import org.pensatocode.simplicity.sample.repository.StudentRepository
 import org.springframework.boot.CommandLineRunner
-import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.builder.SpringApplicationBuilder
-import org.springframework.boot.web.support.SpringBootServletInitializer
+import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.transaction.annotation.EnableTransactionManagement
@@ -30,12 +28,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement
 @SpringBootApplication
 @EnableTransactionManagement
 @Configuration
-open class App : SpringBootServletInitializer() {
-
-	override fun configure(application: SpringApplicationBuilder): SpringApplicationBuilder {
-		return application.sources(App::class.java)
-	}
-
+open class App () {
     @Bean
     open fun init(
             collegeRepository: CollegeRepository,
@@ -44,11 +37,10 @@ open class App : SpringBootServletInitializer() {
         collegeRepository.count()
 		studentRepository.count()
     }
-
 }
 
 fun main(args: Array<String>) {
-	SpringApplication.run(App::class.java, *args)
+	runApplication<App>(*args)
 }
 
 

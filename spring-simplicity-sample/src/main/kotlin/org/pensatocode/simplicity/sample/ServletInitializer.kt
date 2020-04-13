@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 twitter.com/PensatoAlex
+ * Copyright 2017-2020 twitter.com/PensatoAlex
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,12 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.pensato.simplicity.sample.domain
+package org.pensatocode.simplicity.sample
 
-import org.springframework.data.annotation.Id
+import org.springframework.boot.builder.SpringApplicationBuilder
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 
-data class College (
-        @Id var id: Long = 0,
-        var name: String = "",
-        var nameOfCity: String = ""
-)
+class ServletInitializer : SpringBootServletInitializer() {
+
+    override fun configure(application: SpringApplicationBuilder): SpringApplicationBuilder {
+        return application.sources(App::class.java)
+    }
+
+}

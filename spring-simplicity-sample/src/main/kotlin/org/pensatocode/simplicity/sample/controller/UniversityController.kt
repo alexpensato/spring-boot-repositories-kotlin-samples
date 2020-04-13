@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 twitter.com/PensatoAlex
+ * Copyright 2017-2020 twitter.com/PensatoAlex
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.pensato.simplicity.sample.controller
+package org.pensatocode.simplicity.sample.controller
 
-import net.pensato.simplicity.sample.domain.College
-import net.pensato.simplicity.sample.domain.Student
-import net.pensato.simplicity.sample.repository.CollegeRepository
-import net.pensato.simplicity.sample.repository.StudentRepository
-import net.pensato.simplicity.web.AbstractController
+import org.pensatocode.simplicity.sample.domain.College
+import org.pensatocode.simplicity.sample.domain.Student
+import org.pensatocode.simplicity.sample.repository.CollegeRepository
+import org.pensatocode.simplicity.sample.repository.StudentRepository
+import org.pensatocode.simplicity.web.AbstractController
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.util.Assert
 import org.springframework.web.bind.annotation.*
@@ -30,7 +30,7 @@ class UniversityController
 @Autowired constructor(collegeRepository: CollegeRepository, val studentRepository: StudentRepository)
     : AbstractController<College, Long>(collegeRepository){
 
-    @RequestMapping(value = "/{collegeId}/students", method = arrayOf(RequestMethod.GET))
+    @GetMapping("/{collegeId}/students")
     @ResponseBody
     fun findAllStudentsByCollege(@PathVariable collegeId: Long?): List<Student> {
         Assert.notNull(collegeId, "You must provide an ID to locate nested itens in an auxiliary repository.")
