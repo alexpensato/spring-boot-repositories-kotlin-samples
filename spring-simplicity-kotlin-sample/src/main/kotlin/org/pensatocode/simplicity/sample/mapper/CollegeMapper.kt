@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2020 twitter.com/PensatoAlex
+ * Copyright 2017-2020 Alex Magalhaes <alex@pensatocode.org>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,26 +16,26 @@
 package org.pensatocode.simplicity.sample.mapper
 
 import org.pensatocode.simplicity.jdbc.mapper.TransactionalRowMapper
-import org.pensatocode.simplicity.sample.domain.Student
+import org.pensatocode.simplicity.sample.domain.College
 import java.sql.ResultSet
 import java.util.LinkedHashMap
 
-object StudentMapper: TransactionalRowMapper<Student> {
+object CollegeMapper: TransactionalRowMapper<College> {
 
-    override fun mapRow(rs: ResultSet, rowNum: Int): Student {
-        val entity = Student()
+    override fun mapRow(rs: ResultSet, rowNum: Int): College {
+        val entity = College()
         entity.id = rs.getLong("id")
         entity.name = rs.getString("name")
-        entity.address = rs.getString("address")
+        entity.nameOfCity = rs.getString("name_of_city")
 
         return entity
     }
 
-    override fun mapColumns(entity: Student): Map<String, Any> {
+    override fun mapColumns(entity: College): Map<String, Any> {
         val mapping = LinkedHashMap<String, Any>()
         mapping.put("id", entity.id)
         mapping.put("name", entity.name)
-        mapping.put("address", entity.address)
+        mapping.put("name_of_city", entity.nameOfCity)
         return mapping
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2020 twitter.com/PensatoAlex
+ * Copyright 2017-2020 Alex Magalhaes <alex@pensatocode.org>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,8 @@ package org.pensatocode.simplicity.sample.domain
 
 import org.springframework.data.annotation.Id
 
-data class College (
+data class Student(
         @Id var id: Long = 0,
         var name: String = "",
-        var nameOfCity: String = ""
+        var address: String = ""
 )

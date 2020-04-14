@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2020 twitter.com/PensatoAlex
+ * Copyright 2017-2020 Alex Magalhaes <alex@pensatocode.org>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,9 @@ import org.pensatocode.simplicity.jdbc.JdbcRepository
 import org.pensatocode.simplicity.jdbc.mapper.TransactionalRowMapper
 import org.pensatocode.simplicity.sample.mapper.StudentMapper
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Pageable
+import org.springframework.data.domain.Sort
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional
@@ -39,7 +42,8 @@ open class StudentRepositoryImpl(@Autowired jdbcTemplate: JdbcTemplate) : Studen
 
     @Transactional(readOnly=true)
     override fun findAllByCollege(collegeId: Long): List<Student> {
-        val queryString = sqlGenerator.selectAll(tableDesc, "college_id = ?")
+        val pageable = PageRequest.of(0, 10, Sort.unsorted()) as Pageable
+        val queryString = sqlGenerator.selectAll(tableDesc, "college_id = ?", pageable)
         return jdbcTemplate.query(
                 queryString,
                 arrayOf(collegeId),
