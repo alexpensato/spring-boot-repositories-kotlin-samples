@@ -1,0 +1,69 @@
+= Spring Simplicity Framework Sample in Java
+
+The purpose of this example is to serve as a quick reference guide to anyone implementing a Microservice using Java,
+ based on Spring Boot, Spring Data JDBC (JdbcTemplate) and Relational Databases.
+
+It consists of a working project that can run as an independent JAR and also as a deployable WAR.
+
+It uses https://docs.spring.io/spring/docs/current/spring-framework-reference/html/jdbc.html[Spring Data JDBC]
+ subproject, which takes care of many actions needed by JDBC, including open and closing connections,
+ handle transactions, prepare and execute statements, and more.
+
+This is an alternative to small projects where JPA is an overkill. It provides a good trade-off between
+ complexity and performance. Checkout our https://github.com/alexpensato/spring-data-jpa-example[Spring Data JPA]
+ example project.
+
+== Requirements
+* JDK 1.11+
+* PostgreSQL 9.5+
+* Gradle 6.3.x
+* A Java IDE (preferably IntelliJ IDEA)
+
+== Database preparation
+
+Before running the project, it is necessary to create its user and database in the PostgreSQL server.
+
+The project has a few settings configured in the application.properties file, but you can modify them as you wish.
+
+Below are DDL commands using PostgreSQL syntax:
+
+[source, sql]
+----
+CREATE USER pensato WITH
+	LOGIN
+	SUPERUSER
+	INHERIT
+	NOREPLICATION
+	CONNECTION LIMIT -1
+	PASSWORD 'pensato';
+----
+
+[source, sql]
+----
+CREATE DATABASE simplicity_sample
+    WITH
+    OWNER = pensato
+    ENCODING = 'UTF8'
+    CONNECTION LIMIT = -1;
+----
+
+== Disclaimer
+
+This project is neither an API modeling example, nor it is as a DDD (Domain Driven Design) example.
+
+Use it only as a Java language reference guide to implement a Spring Data JdbcTemplate microservice project.
+
+
+== Contributions
+
+…are always welcome.
+
+Don’t hesitate to submit a https://github.com/alexpensato/spring-boot-repositories-samples/issues[bug report] or a
+https://github.com/alexpensato/spring-boot-repositories-samples/pulls[pull requests].
+
+When filling a bug report or submitting a new feature, please try including supporting test cases.
+
+
+== License
+
+This project is licensed under http://www.apache.org/licenses/LICENSE-2.0.html[Apache License 2.0].
